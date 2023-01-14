@@ -10,7 +10,7 @@
   <body>
   <div class="container my-4">
      <h1 class="text-center">Signup to our website</h1>
-     <form action="/sample-project/signup.php" method="post" enctype="multipart/form-data">
+     <form id="signup" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fullName">Full name</label>
             <input type="text" class="form-control" id="fullName" name="fullName">
@@ -19,7 +19,6 @@
         <div class="form-group">
             <label for="image">Image upload</label>
             <input type="file" class="form-control" id="image" name="image" >
-            
         </div>
         <div class="form-group">
             <label for="email">Email</label>

@@ -1,6 +1,6 @@
 <?php
 require '../components/_db.php';
-
+session_start();
 function msg($success,$status,$message,$extra = []){
     return array_merge([
         'success' => $success,
@@ -36,10 +36,6 @@ else:
     // CHECKING THE EMAIL FORMAT (IF INVALID FORMAT)
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
         $returnData = msg(0,422,'Invalid Email Address!');
-    
-    // IF PASSWORD IS LESS THAN 8 THE SHOW THE ERROR
-    elseif(strlen($password) < 8):
-        $returnData = msg(0,422,'Your password must be at least 8 characters long!');
 
     // THE USER IS ABLE TO PERFORM THE LOGIN ACTION
     else:
@@ -53,16 +49,16 @@ else:
             // IF THE USER IS FOUNDED BY EMAIL
             if($query_stmt->rowCount()):
                 $row = $query_stmt->fetch(PDO::FETCH_ASSOC);
-                $check_password = password_verify($password, $row['password']);
+                $check_password = $password == $row['password'];
 
                 // VERIFYING THE PASSWORD (IS CORRECT OR NOT?)
                 // IF PASSWORD IS CORRECT THEN SEND THE LOGIN TOKEN
                 if($check_password):
-                    
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['email'] = $email;
                     $returnData = [
                         'success' => 1,
-                        'message' => 'You have successfully logged in.',
-                        'token' => $token
+                        'message' => 'You have successfully logged in.'
                     ];
 
                 // IF INVALID PASSWORD
