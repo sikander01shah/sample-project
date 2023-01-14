@@ -8,7 +8,7 @@ $('#login').submit(function (e) {
         success: function (response) {
             if(response.success == 1){
                 alert(response.message)
-                location.href = '/sample1/welcome.php';
+                location.href = '/sample-project/welcome.php';
             }else{
                 alert(response.message)
             }
@@ -26,7 +26,7 @@ $('#signup').submit(function (e) {
         success: function (response) {
             if(response.success == 1){
                 alert(response.message)
-                location.href = '/sample1/index.php';
+                location.href = '/sample-project/index.php';
             }else{
                 alert(response.message)
             }
